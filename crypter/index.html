@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>crypter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.0.min.js"
+      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <div class="desktop">
+      <div class="wrapper" id="app">
+        <!-- <div class="titile">
+          <h1 class="ui header">Vigenere Cipher by rxpd</h1>
+        </div> -->
+        <div class="container">
+          <div class="main">
+            <div class="encrypt-window">
+              <h1 class="ui header">encrypt</h1>
+              <div class="crypto-info">
+                <div
+                  class="ui input crypto-input"
+                  v-bind:class="{ error: passwordToEncryptError }"
+                >
+                  <input
+                    type="text"
+                    v-model="passwordToEncrypt"
+                    v-on:input="encrypt"
+                    placeholder=""
+                    maxlength="20"
+                  />
+                </div>
+                <p v-show="encryptedPassword">by</p>
+                <p v-show="encryptedPassword" class="key-input">{{keyInput}}</p>
+                <p v-show="encryptedPassword">key</p>
+              </div>
+
+              <div class="encrypt-reuslt-block">
+                <p v-show="encryptedPassword">your encrypted password:&nbsp;</p>
+                <p class="encrypt-reuslt-password">
+                  {{encryptedPassword}}
+                </p>
+              </div>
+            </div>
+            <div class="decrypt-window">
+              <h1 class="ui header">decrypt</h1>
+              <div class="crypto-info">
+                <div
+                  class="ui input crypto-input"
+                  v-bind:class="{ error: passwordToDecryptError }"
+                >
+                  <input
+                    class="decrypt-input"
+                    type="text"
+                    v-model="passwordToDecrypt"
+                    v-on:input="decrypt"
+                    placeholder=""
+                    maxlength="20"
+                  />
+                </div>
+                <p v-show="decryptedPassword">by</p>
+                <p v-show="decryptedPassword" class="key-input">{{keyInput}}</p>
+                <p v-show="decryptedPassword">key</p>
+                <div class="encrypt-reuslt-block">
+                  <p v-show="decryptedPassword">
+                    your decrypted password:&nbsp;
+                  </p>
+                  <p class="encrypt-reuslt-password">
+                    {{decryptedPassword}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="key-view">
+            <!-- <h2 class="ui header">key</h2> -->
+            <div class="key-info">
+              <p v-show="haveKey">your key is -</p>
+              <p v-show="haveKey" class="key-input">
+                {{keyInput}}
+              </p>
+            </div>
+
+            <div
+              class="ui action input change-key"
+              v-bind:class="{ error: refreshInputError }"
+            >
+              <input
+                v-on:input="refreshKeyChange"
+                v-model="refreshKeyInput"
+                maxlength="16"
+                type="text"
+                placeholder=""
+              />
+              <button v-on:click="setKey()" class="ui blue icon button">
+                <i class="redo icon"></i>
+              </button>
+            </div>
+            <!-- <div class="your-key-change-info" v-show="haveKey">
+              <p>your key is -</p>
+              <p class="key-input">{{keyInput}}</p>
+            </div> -->
+          </div>
+          <div class="characters-info">
+            <p>these characters are used</p>
+            <p class="letters-list">{{letters}}</p>
+            <p class="symbols-list">{{symbols}}</p>
+            <p class="numbers-list">{{numbers}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
